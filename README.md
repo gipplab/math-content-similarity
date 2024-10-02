@@ -1,6 +1,6 @@
 ## About
 
-This repository contains the resources used for RecSys'2024 submission "Towards Better STEM Recommendations: A Gold-Standard Dataset with Math content"
+This repository contains the resources used for ECIR'2025 submission "Learning from the Expert: Generating Recommendations Like an Expert Mathematician"
 
 
 ### Install Dependencies
@@ -37,13 +37,3 @@ To get evaluation results of Initial Ranker, go to follow the mentioned steps:
 To get evaluation results of Re-ranker, go to follow the mentioned steps:
 
 ```reproducing_results/Re-ranker/```
-
-### User study (HyMathRec Evaluation, Table 5 and Table 6)
-
-Annotations of 4 annotators are available in the folder 
-
-```src/hybrid/originalAnno/```
-
-To calculate Kappa scores and evaluation scores (Precision, Recall, F1, MRR, nDCG), run
-
-```python src/hybrid/userAnnoEval.py```
