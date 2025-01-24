@@ -23,3 +23,5 @@ Then run
 - Feature Refereces
 
 ```python /src/hybrid/feature_simil/co_citation.py```
+
+For recreating the LLM2Vec model, we applied the MNTP and SIMCSE procedures of LLM2Vec https://github.com/McGill-NLP/llm2vec to https://huggingface.co/Qwen/Qwen2.5-Math-1.5B.

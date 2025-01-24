@@ -26,23 +26,25 @@ To get evaluation results of basline, please go to follow the mentioned steps:
 
 ```reproducing_results/Baseline/```
 
-### Initial Ranker candidates (Table 3)
+
+### Fine tuned Stella (Table 3)
+
+To get evaluation results of fine tuned stella, please go to follow the mentioned steps:
+
+```reproducing_results/Baseline/```
+
+### Initial Ranker candidates (Table 4)
 
 To get evaluation results of Initial Ranker, go to follow the mentioned steps:
 
 ```reproducing_results/InitialRanker/```
 
-### Re-anker candidates (Table 4)
+### Re-anker candidates (Table 5)
 
 To get evaluation results of Re-ranker, go to follow the mentioned steps:
 
 ```reproducing_results/Re-ranker/```
 
-### User study (HyMathRec Evaluation, Table 5 and Table 6)
-
-Annotations of 4 annotators are available in the folder 
-
-```src/hybrid/originalAnno/```
 
 To calculate Kappa scores and evaluation scores (Precision, Recall, F1, MRR, nDCG), run
 
