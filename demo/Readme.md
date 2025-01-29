@@ -4,7 +4,8 @@ Here we explain how to browse recommendations on MaRDI portal.
 
 Step 1: Visit MaRDI portal
 
-Step 2: ENter zbMATHDOcumentID or search for any research paper for mathematics. The papers form zbMATHOPen will have recommendtaions. Please note that some documents might have not have recommendtaions if they are fairly new, have no mateadata except id, etc. Lets say we enter in search portal: Simple C*-algebras with perforation 
+Step 2: Enter zbMATHDOcumentID or search for any research paper in mathematics that is from zbMATHOpen. Only the papers form zbMATHOPen will have recommendtaions. Please note that some documents might not have recommendtaions if they are fairly new, have no mateadata except id, etc. 
+For example, search: "Simple C*-algebras with perforation" on https://portal.mardi4nfdi.de/w/index.php?search 
 
 Step 3: Select the closest matching article
 

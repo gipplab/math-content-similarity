@@ -1,1 +1,0 @@
-"""Initialize the /scripts directory."""

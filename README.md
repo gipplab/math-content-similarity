@@ -1,17 +1,17 @@
 ## About
 
-This repository contains the resources used for SIGIR'2025 submission "MATHRecSys: Recommender System for Math Research Papers"
+This repository contains the resources of SIGIR'2025 submission "MATHRecSys: Recommender System for Math Research Papers"
 
 
 ### Install Dependencies
 
-Please run the following to install dependencies for running the scripts to obtain results (it is recommended to create a virtual environment first).
+Please run the following to install dependencies for running the scripts to obtain results (it is recommended to create a virtual environment first and load it before you start loading data or running experiments).
 
 ```pip install -r requirements.txt```
 
 ### Dataset
 
-Please refer to ```data_``` folder of the repository
+Please refer to ```data``` folder of this repository to get information on how to download the data, obtain seed and recommendations pairs, and split (train/test/validation) used for traininng and tresting models of both zbRevCit and zbRev Quality datasets. 
 
 ## Evaluation results
 
@@ -44,7 +44,14 @@ To calculate Kappa scores and evaluation scores (Precision, Recall, F1, MRR, nDC
 
 ```python src/hybrid/userAnnoEval.py```
 
+Additionally, the evaluation results of the reranker stage on zbRevCit dataset are available in 
 
-Additionally, the evaluation results of the reranker stage are available in 
+```reproducing_results/Re-ranker/evalresultsReranker.md```
 
-```python reproducing_results/Re-ranker/Readmde.md```
+## Organizers
+
+[Anonymous]
+
+## COntact
+
+[ANonymous]
