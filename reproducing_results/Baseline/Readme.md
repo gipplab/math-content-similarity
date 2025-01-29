@@ -23,3 +23,8 @@ Then run
 - Feature Refereces
 
 ```python /src/base_models/co_citation.py```
+
+
+### Stella fine tune (Table 2)
+
+```python /src/stella_finetune/contra_stella.py```
