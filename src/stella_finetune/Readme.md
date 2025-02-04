@@ -1,8 +1,6 @@
-### Re-anker candidates (Table 5)
+### Stella fine tune (Table 2)
 
-To get evaluation results of Re-ranker, go to follow the mentioned steps:
-
-```python cutsom_reranker.py```
+```python contra_stella.py```
 
 ### To calculate evaluation scores (Precision, Recall, F1, MRR, nDCG), run
 

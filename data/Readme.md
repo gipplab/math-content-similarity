@@ -4,11 +4,13 @@ We introduce two datasets of Recommender System for research publications in Mat
 zbRevCit: a large-scale dataset of over 350k recommendation pairs.
 zbRevQuality: a high-quality small-scale dataset of 421 manually curated recommendations by an expert reviewer.
 
-In the following, we explain how does each dataset looks like and how to obtain its contents.
+In the following, we explain how to obtain each dataset. 
+
+# To view dataset's content online on zbMATH Open
 
 ## zbRevCit
 
-Here we directly provide zbMATHOpen document identifier (docID) pairs in a csv file, with two columns:
+We provide zbMATHOpen internal document identifier (docID) pairs in a csv file, with two columns:
 document_id : docID for seed
 recommendations: docIDs separated with ';' as recommendations for the seed
 
@@ -42,3 +44,33 @@ Example seed and recommendation pair for demonstration, please click on the link
 | [1591097](https://zbmath.org/1591097) | [5049067](https://zbmath.org/5049067) ;[3867686](https://zbmath.org/3867686) ;[1758339](https://zbmath.org/1758339) ;[2136591](https://zbmath.org/2136591) |
 
 ZbRevQuality is only used as test dataset.
+
+# To view dataset's content offlie
+
+In order to view both the dataset's contents offline, we first use zbMATH Open [API](https://api.zbmath.org/v1/) to get contents of all documents of zbMATH Open in a casv file. This single file then can be used to obtain contents of both the datasets witgout again creating a separate file. 
+
+To obtain all documents of zbMATH Open in  csv file.
+
+Run ```python zbMATHDocsData.py```   
+
+Output: File zbMATHDocsData.csv created with fields
+- document_id = zbMATHOPen unique document idenfier
+- text = review text 
+- title = document title
+- msc = mathematics subject classification codes for the document
+- keyowrds = keywords for the document
+- references = references for the document
+
+## Sample data from zbMATHDocsData.csv
+
+| document_id | text | title | msc | keywords | refrences |
+|-------------|------|-------|------|------|------|
+| [7973267](https://zbmath.org/7973267) | Summary: The Inverse Gaussian distribution finds application in various fields, such as finance, survival analysis, psychology, engineering, physics, and quality control . . .  | On the power of Gini index-based goodness-of-fit test for the inverse Gaussian distribution. |  {62G10: Nonparametric hypothesis testing, 62P30: Applications of statistics in engineering and industry; control charts} | (Gini index; type-I error; critical points; test power; Monte Carlo simulation) | (Alizadeh, H.N. (2017), Gini index-based goodness-of-fit test for the logistic distribution, Communications in Statistics-Theory and Methods, 46, 7114-7124., . . . . ) |
+
+## Getting contents of zbRevCit & zbRevQuality
+
+We have docIDs in both the downloaded files zbRevCit.csv and zbRevQuality.csv. 
+In order to obtain contents of each docID please run the follwing script with parameter docID from dataset files.
+
+
+```python find_document.py zb12345 --file my_data.csv```

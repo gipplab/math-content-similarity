@@ -4,9 +4,16 @@
 
 - Base models
 
-- Stella/Stella-ref/bge-en/llm-embedder/DPR/QWEN
+- Stella/Stella-ref/bge-en/llm-embedder/DPR
 
-```python /src/base_models/abstract_simil.py```
+```python abstract_simil.py```
+
+Please replace model_dir with the base model path.
+
+Stella & Stella-ref = NovaSearch/stella_en_400M_v5
+bge-en = BAAI/bge-base-en-v1.5
+llm-embedder = BAAI/llm-embedder
+DPR = approach0/dpr-cocomae-320
 
 - QWEN
 
@@ -24,7 +31,6 @@ Then run
 
 ```python /src/base_models/co_citation.py```
 
+## To calculate evaluation scores (Precision, Recall, F1, MRR, nDCG), run
 
-### Stella fine tune (Table 2)
-
-```python /src/stella_finetune/contra_stella.py```
+```python src/getEValscores.py /path/to/generatedrecommendations.csv```

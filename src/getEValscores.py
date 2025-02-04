@@ -1,3 +1,4 @@
+import argparse
 import numpy as np
 
 def mean_reciprocal_rank(ideal_recommendations, generated_recommendations):
@@ -59,3 +60,59 @@ def main(ideal_recommendations, generated_recommendations):
     recall_ = recall_at_k(ideal_recommendations, generated_recommendations)
     recall_1k = recall_at_k(ideal_recommendations, generated_recommendations, 4000)
     return precision_3, precision_5, recall_, recall_1k, mrr, ndcg_5
+
+def read_results_file(file_path,split='test'):
+    if split=='test':
+        split_df = test_
+    elif split=='train':
+        split_df = train_
+    else:
+        split_df = valid_
+    getallfls = os.listdir(file_path)
+    genRecmnds, idealRecmnds = [], []
+    for i,eachF in enumerate(getallfls):
+        with open(file_path+eachF, 'r') as json_file:
+            # Load the content of the file into a Python dictionary
+            data = json.load(json_file)
+            try:
+                list_true = isinstance(data[list(data.keys())[0]][0],list)
+            except:
+                list_true = isinstance(data[list(data.keys())[1]][0],list)
+        for eackDoc in data.keys():
+            if eackDoc in intersection: # check if we have data for this seed
+                idl_recmnds = idlRecommendations(eackDoc,split_df)
+                if set(idl_recmnds).issubset(intersection_cit): #check if we have data for both recmnds
+                    if len(idl_recmnds) == 0:
+                        print(eackDoc)
+                    idealRecmnds.append(idl_recmnds)
+                    if list_true:
+                        gen_recmnds = [str(ea_[0]) for ea_ in data[eackDoc][:10]]
+                    else:
+                        gen_recmnds = [str(ea_) for ea_ in data[eackDoc][:10]]
+                    genRecmnds.append(gen_recmnds)
+    p3, p5, r_, mrr_, ndcg_ = eval_metrics.main(idealRecmnds, genRecmnds)
+
+    print(p3, p5, r_, mrr_, ndcg_)
+
+def read_results_file(file_path, split='test'):
+    try:
+        with open(file_path, 'r') as file:
+            lines = file.readlines()
+        
+        results = [line.strip() for line in lines if split in line]
+        return results
+    except FileNotFoundError:
+        print(f"Error: The file '{file_path}' was not found.")
+        return None
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="Read a results file and filter by split.")
+    parser.add_argument("file_path", type=str, help="Path to the results file")
+    parser.add_argument("--split", type=str, default="test", help="Split type to filter (default: 'test')")
+
+    args = parser.parse_args()
+
+    results = read_results_file(args.file_path, args.split)
+    if results:
+        for line in results:
+            print(line)
