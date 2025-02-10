@@ -49,7 +49,7 @@ To get evaluation results of Initial Ranker, please follow the mentioned steps:
 
 ### Re-anker candidates (Table 5)
 
-To get evaluation results of Re-ranker, go to follow the mentioned steps:
+To get evaluation results of Re-ranker and the evaluation results of the reranker on zbRevCit dataset please refer to:
 
 ```src/Re-ranker/Readme.md```
 

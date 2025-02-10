@@ -73,4 +73,4 @@ We have docIDs in both the downloaded files zbRevCit.csv and zbRevQuality.csv.
 In order to obtain contents of each docID please run the follwing script with parameter docID from dataset files.
 
 
-```python find_document.py zb12345 --file my_data.csv```
+```python offlinedata.py zb12345 --file my_data.csv```
