@@ -10,23 +10,24 @@ If you want to have run any script in this repository (to load data, to obtain r
 
 ## Dataset
 
-Please refer to ```data/Readme.md``` of this repository to get information on how dataset looks like, how to download it, obtain seed and recommendations pairs for both zbRevCit and zbRev Quality datasets.
+Please refer to [data/Readme.md](data/Readme.md) of this repository to get information on how dataset looks like, how to download it, obtain seed and recommendations pairs for both zbRevCit and zbRev Quality datasets.
 
 ## Demo
 
-Please refer to the ```demo/Readme.md``` folder of this repository on how does the recommendations looks on the MarDI portal. 
+Please refer to the [demo/Readme.md](demo/Readme.md) folder of this repository on how does the recommendations looks on the MarDI portal. 
 
-## HyMathRec: Two-stage Recommender System
+## Additional Result Table
 
-We proposed a two stage Recommender System that improves on baseline and on fine tuned Large Language Model.
-We expect that you have a csv file with columns similar to ```zbMATHDocsData.csv```, explained in ```data/Readme.md```.
-To generate ranked recommendations for a seed (docID:7952804), given n candidate recommendations, run the follwing script.
+The results of the re-ranker on zbRevCit is available in [src/Re-ranker/Readmde.md](src/Re-ranker/Readmde.md).
+
+## Reproducing Results
+
+We expect that you have a csv file with columns similar to ```zbMATHDocsData.csv``` (explained in [data/Readme.md](data/Readme.md)).
+To generate ranked recommendations for a seed (e.g., docID: 7952804), given n candidate recommendations, run the follwing script.
 
 ```python src/hyMathRec.py --file my_data.csv --docid  7952804```
 
 This will generate ranked recommendations in a csv file, in decreaing order of likelihood. 
-
-## Reproducing experiments
 
 ### Baseline models (Table 2)
 
