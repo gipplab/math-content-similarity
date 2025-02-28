@@ -29,8 +29,8 @@ Example seed and recommendation pair for demonstration, please click on the link
 ## zbRevQuality
 
 Here we directly provide zbMATHOpen document identifier (docID) pairs in a csv file, with two columns:
-document_id : docID for seed
-recommendations: docIDs separated with ';' as recommendations for the seed
+- document_id : docID for seed
+- recommendations: docIDs separated with ';' as recommendations for the seed
 
 File with 421 recommendation pairs: [zbRevQuality.csv](https://drive.google.com/file/d/1Sr7fk1RSshNBAWNn6a_-Dsvbo1l4KD91/view?usp=sharing)
 
@@ -45,16 +45,16 @@ Example seed and recommendation pair for demonstration, please click on the link
 
 ZbRevQuality is only used as test dataset.
 
-# To view dataset's content offlie
+# To view dataset's content offline
 
-In order to view both the dataset's contents offline, we first use zbMATH Open [API](https://api.zbmath.org/v1/) to get contents of all documents of zbMATH Open in a casv file. This single file then can be used to obtain contents of both the datasets witgout again creating a separate file. 
+In order to view both the dataset's contents offline, we first use zbMATH Open [API](https://api.zbmath.org/v1/) to get contents of all documents of zbMATH Open in a casv file. This single file can then be used to obtain the contents of both datasets without again creating a separate file. 
 
-To obtain all documents of zbMATH Open in  csv file.
+To obtain all documents of zbMATH Open in a CSV file.
 
 Run ```python zbMATHDocsData.py```   
 
 Output: File zbMATHDocsData.csv created with fields
-- document_id = zbMATHOPen unique document idenfier
+- document_id = zbMATHOPen unique document identifier
 - text = review text 
 - title = document title
 - msc = mathematics subject classification codes for the document
