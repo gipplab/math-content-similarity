@@ -10,7 +10,7 @@ If you want to have run any script in this repository (to load data, to obtain r
 
 ## Dataset
 
-Please refer to [data/Readme.md](data/Readme.md) of this repository to get information on how dataset looks like, how to download it, obtain seed and recommendations pairs for both zbRevCit and zbRev Quality datasets.
+Please refer to [data/Readme.md](data/Readme.md) of this repository to get information on how used datasets looks like, how to download it, obtain seed and recommendations pairs for both zbRevCit and zbRevQuality datasets.
 
 ## Demo
 

@@ -71,39 +71,25 @@ def read_results_file(file_path,split='test'):
     getallfls = os.listdir(file_path)
     genRecmnds, idealRecmnds = [], []
     for i,eachF in enumerate(getallfls):
-        with open(file_path+eachF, 'r') as json_file:
-            # Load the content of the file into a Python dictionary
-            data = json.load(json_file)
-            try:
-                list_true = isinstance(data[list(data.keys())[0]][0],list)
-            except:
-                list_true = isinstance(data[list(data.keys())[1]][0],list)
-        for eackDoc in data.keys():
-            if eackDoc in intersection: # check if we have data for this seed
-                idl_recmnds = idlRecommendations(eackDoc,split_df)
-                if set(idl_recmnds).issubset(intersection_cit): #check if we have data for both recmnds
-                    if len(idl_recmnds) == 0:
-                        print(eackDoc)
-                    idealRecmnds.append(idl_recmnds)
-                    if list_true:
-                        gen_recmnds = [str(ea_[0]) for ea_ in data[eackDoc][:10]]
-                    else:
-                        gen_recmnds = [str(ea_) for ea_ in data[eackDoc][:10]]
-                    genRecmnds.append(gen_recmnds)
-    p3, p5, r_, mrr_, ndcg_ = eval_metrics.main(idealRecmnds, genRecmnds)
-
+        ideal_recommendations = []
+        generated_recommendations = []
+        with open(csv_filename, mode='r', newline='') as csvfile:
+            csv_reader = csv.reader(csvfile)
+            next(csv_reader)  # Skip header
+            seed_to_ideal = {}
+            seed_to_generated = defaultdict(list) 
+            for row in csv_reader:
+                seed = int(row[0])
+                ideal_recommendation = eval(row[1])  # Convert string representation to list
+                recommendation = int(row[3])
+                if seed not in seed_to_ideal:
+                    seed_to_ideal[seed] = ideal_recommendation 
+                seed_to_generated[seed].append(recommendation)
+        for seed in seed_to_ideal:
+            ideal_recommendations.append(seed_to_ideal[seed])
+            generated_recommendations.append(seed_to_generated[seed])
+    p3, p5, r_, mrr_, ndcg_ = main(idealRecmnds, genRecmnds)
     print(p3, p5, r_, mrr_, ndcg_)
-
-def read_results_file(file_path, split='test'):
-    try:
-        with open(file_path, 'r') as file:
-            lines = file.readlines()
-        
-        results = [line.strip() for line in lines if split in line]
-        return results
-    except FileNotFoundError:
-        print(f"Error: The file '{file_path}' was not found.")
-        return None
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Read a results file and filter by split.")
@@ -113,6 +99,3 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     results = read_results_file(args.file_path, args.split)
-    if results:
-        for line in results:
-            print(line)

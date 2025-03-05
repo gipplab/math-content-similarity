@@ -6,16 +6,13 @@ import argparse
 def find_document(doc_id, file_path='zbMATHDocsData.csv'):
     try:
         # Load CSV file
-        df = pd.read_csv(file_path)
-        
+        df = pd.read_csv(file_path)      
         # Ensure the required columns exist
         required_columns = {'document_id', 'text', 'title', 'msc', 'keywords', 'references'}
         if not required_columns.issubset(df.columns):
             raise ValueError("CSV file is missing required columns")
-        
         # Find row where document_id matches the given docID
         row = df[df['document_id'] == doc_id]
-        
         if row.empty:
             print(f"No document found with ID: {doc_id}")
         else:
