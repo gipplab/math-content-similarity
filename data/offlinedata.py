@@ -8,7 +8,7 @@ def find_document(doc_id, file_path='zbMATHDocsData.csv'):
         # Load CSV file
         df = pd.read_csv(file_path)      
         # Ensure the required columns exist
-        required_columns = {'document_id', 'text', 'title', 'msc', 'keywords', 'references'}
+        required_columns = {'document_id', 'text', 'title', 'msc', 'keywords', 'references', 'references_id'}
         if not required_columns.issubset(df.columns):
             raise ValueError("CSV file is missing required columns")
         # Find row where document_id matches the given docID

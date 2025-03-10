@@ -23,11 +23,11 @@ The results of the re-ranker on zbRevCit is available in [src/Re-ranker/Readmde.
 ## Reproducing Results
 
 We expect that you have a csv file with columns similar to ```zbMATHDocsData.csv``` (explained in [data/Readme.md](data/Readme.md)).
-To generate ranked recommendations for a seed (e.g., docID: 7952804), given n candidate recommendations, run the follwing script.
+To generate top 10 ranked recommendations for a seed (e.g., docID: 7952804), run the follwing script.
 
 ```python src/hyMathRec.py --file my_data.csv --docid  7952804```
 
-This will generate ranked recommendations in a csv file, in decreaing order of likelihood. 
+This will generate ranked recommendations in a csv file, in decreasing order of likelihood. 
 
 ### Baseline models (Table 2)
 

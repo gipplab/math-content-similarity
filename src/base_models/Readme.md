@@ -10,10 +10,10 @@
 
 Please replace model_dir with the base model path.
 
-Stella & Stella-ref = NovaSearch/stella_en_400M_v5
-bge-en = BAAI/bge-base-en-v1.5
-llm-embedder = BAAI/llm-embedder
-DPR = approach0/dpr-cocomae-320
+- Stella & Stella-ref = NovaSearch/stella_en_400M_v5
+- bge-en = BAAI/bge-base-en-v1.5
+- llm-embedder = BAAI/llm-embedder
+- DPR = approach0/dpr-cocomae-320
 
 - QWEN
 

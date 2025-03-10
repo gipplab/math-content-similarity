@@ -1,119 +1,48 @@
-import sys
 import pickle
 import numpy as np
-import jsonlines
-import mabowdorscores
-from collections import defaultdict
-from sklearn.ensemble import RandomForestClassifier
-
-def getFeatuResRe(seed_):
-    """lod all top 1k recommendations and retrun seeds"""
-    locati_ = "./InitialRanker/"
-    abstr = pickle.load(open(locati_+"abstract.pkl", 'rb'))
-    citn = pickle.load(open(locati_+"cits_withstdvl.pkl", 'rb'))
-    keywrd = pickle.load(open(locati_+"kywrd_withstdvl.pkl", 'rb'))
-    math = pickle.load(open(locati_+"math_withstdvl.pkl", 'rb'))
-    msc = pickle.load(open(locati_+"msc_withstdvl.pkl", 'rb'))
-    titls = pickle.load(open(locati_+"title.pkl", 'rb'))
-    if seed_ in citn.keys():
-        citn_val = citn[seed_][:1000]
-    else:
-        citn_val = []
-    return abstr[seed_][:1000],citn_val, keywrd[seed_][:1000], math[seed_][:1000], msc[seed_][:1000], titls[seed_][:1000]
-
-def get_data_r(dataset):
-    # getting re-ranker training data and testing data
-    possamp, negsamp = pickle.load(open(dataset, 'rb'))
-    records = []
-    seedToidlrcmnds = mabowdorScores.getidealRecommendations()
-    seedrecPrs = list()
-    pos_seeds = set([eachEle[0] for eachEle in possamp])
-    for eachSeed in pos_seeds:
-        abs_, cits, kwr, mth, msc, ttle =  getFeatuResRe(eachSeed)
-        #for id_,eachF in enumerate([abs_, kwr, mth, msc, ttle]):
-        for id_,eachF in enumerate([abs_, cits, kwr, mth, msc, ttle]):
-            for eachEle in eachF:
-                if eachEle[0] in seedToidlrcmnds[eachSeed]:
-                    records.append([eachEle[1],id_,1.0])
-                    seedrecPrs.append([eachSeed,eachEle[0]])
-                else:
-                    records.append([eachEle[1],id_,0.0])
-                    seedrecPrs.append([eachSeed,eachEle[0]])
-    with open("randomFOrest_data.pkl", "wb") as wpf:
-        pickle.dump(seedrecPrs, wpf)
-    return records
-
-def random_forest():
-    list_of_list_samps = get_data_r(dataset_train)
-    training_data = np.array(list_of_list_samps)
-    X_train = training_data[:, :-1]  # features: similarity score and feature ID
-    y_train = training_data[:, -1]   # labels
-    list_of_testsampe = get_data_r(dataset_test)
-    test_data = np.array(list_of_testsampe)
-    test_data = test_data[:,:-1]
-    # Training the model
-    clf = RandomForestClassifier(n_estimators=100, random_state=42)
-    clf.fit(X_train, y_train)
-    # Predicting probabilities for the test data
-    test_probs = clf.predict_proba(test_data)  # Getting the probability for label 1.0
-    with open("randomFOrest_predictns.pkl", "wb") as wpf:
-        pickle.dump(test_probs, wpf)
+from sklearn.preprocessing import StandardScaler
+from sklearn.neural_network import MLPClassifier
 
 def mpnn():
-    list_of_list_samps = get_data_r(dataset_train)
-    training_data = np.array(list_of_list_samps)
-    X_train = training_data[:, :-1]  # features: similarity score and feature ID
-    y_train = training_data[:, -1]   # labels
-    list_of_testsampe = get_data_r(dataset_test)
-    test_data = np.array(list_of_testsampe)
-    test_data = test_data[:,:-1]
-    # Standardizing the feature data for better performance with the neural network
+    with open("initRanked.pkl", "rb") as f:
+        data_dict = pickle.load(f)
+    all_tuples = []
+    feature_ids = {
+        'text': 1,
+        'title': 2,
+        'msc': 3,
+        'keywords': 4,
+        'references': 5
+    }
+    for feature, feature_id in feature_ids.items():
+        feature_data = data_dict.get(feature, [])
+        for doc_id, score in feature_data:
+            all_tuples.append((feature_id, score))
+    # Convert the list of tuples to a numpy array for MLPClassifier
+    all_tuples_array = np.array(all_tuples)
+    X_data = all_tuples_array[:, 1].reshape(-1, 1)  # Feature: score
+    feature_ids = all_tuples_array[:, 0].reshape(-1, 1)  # Feature IDs
+    # Combine features (feature_id and score) as input for MLPClassifier
+    X_combined = np.hstack((feature_ids, X_data))
     scaler = StandardScaler()
-    X_train_scaled = scaler.fit_transform(X_train)
-    # Defining the neural network classifier
+    X_scaled = scaler.fit_transform(X_combined)
     nn_clf = MLPClassifier(hidden_layer_sizes=(10, 10), max_iter=1000, random_state=42)
-    # Training the neural network classifier
-    nn_clf.fit(X_train_scaled, y_train)
-    # Preparing the test data by applying the same scaling
-    X_test_scaled = scaler.transform(test_data)
-    # Predicting probabilities for the test data
-    test_probs = nn_clf.predict_proba(X_test_scaled)  # Getting the probability for label 1.0
-    with open("mpnn_predictns.pkl", "wb") as wpf:
-        pickle.dump(test_probs, wpf)
+    # Predicting probabilities for the test data (labels and probabilities)
+    test_probs = nn_clf.predict_proba(X_scaled)  # Getting the probability for label 1.0
+    predicted_labels = nn_clf.predict(X_scaled)
+    # Store the doc_id, predicted label, and probability (only for label 1.0)
+    ranked_samples = []
+    for idx, label in enumerate(predicted_labels):
+        if label == 1:
+            doc_id = data_dict['text'][idx][0]  # Use doc_id from the 'text' feature
+            prob = test_probs[idx][1]  # Probability of label 1.0
+            ranked_samples.append((doc_id, prob))
+    ranked_samples.sort(key=lambda x: x[1], reverse=True)     # Rank the samples based on probability in descending order
+    top_10_doc_ids = [doc_id for doc_id, _ in ranked_samples[:10]]
+    print("Top 10 Ranked Document IDs:")
+    for idx, doc_id in enumerate(top_10_doc_ids, 1):
+        print(f"{idx}. {doc_id}")
+    with open("ranked_ids.pkl", "wb") as wpf:
+        pickle.dump(ranked_samples, wpf)
 
-def getEvalScoresReRanker():
-    """Given predictions from re-ranker, get values in resultsfiles"""
-    predictions_dir = "randomFOrest_predictns.pkl"
-    seedrecpairs_dir = "randomFOrest_data.pkl"
-    with open(predictions_dir, "rb") as prdf:
-        predictions = pickle.load(prdf)
-    with open(seedrecpairs_dir, "rb") as prda:
-        seedrecpairs = pickle.load(prda)
-    dictScores = defaultdict(lambda: list())
-    print(len(predictions), len(seedrecpairs))
-    for id_, eachPred in enumerate(predictions):
-        dictScores[seedrecpairs[id_][0]].append([seedrecpairs[id_][1], eachPred[1]])
-    print(len(dictScores))
-    dictSortedScores = {}
-    for eachSeed in dictScores.keys():
-        sorted_list = sorted(dictScores[eachSeed], key=lambda x: x[1], reverse=True)
-        dictSortedScores[eachSeed] = sorted_list
-    results = []
-    seed_idlrecmnds = mabowdorScores.getidealRecommendations()
-    for each_ in dictSortedScores.keys():
-        baselinercmnds = []
-        baselinercmnds.append([0, int(each_), 1.0])  # Baseline recommendation
-        for id_, eachRcmnds in enumerate(dictSortedScores[each_][:1500]):
-            baselinercmnds.append([id_ + 1, int(eachRcmnds[0]), eachRcmnds[1]])
-        for rec in baselinercmnds:
-            results.append([each_, seed_idlrecmnds[each_], rec[0], rec[1], rec[2]])
-    csv_filename = "rslts_randforest.csv"
-    with open(csv_filename, mode='w', newline='') as csvfile:
-        csv_writer = csv.writer(csvfile)
-        csv_writer.writerow(["Seed", "IdealRecommendations", "Rank", "Recommendation", "Score"])
-        csv_writer.writerows(results)
-
-
-random_forest()
 mpnn()
-getEvalScoresReRanker()

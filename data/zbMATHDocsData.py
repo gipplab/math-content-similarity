@@ -36,7 +36,6 @@ def parse_zbmath_xml(file_path):
         title = record.find(".//{/1.1/}title")
         review = record.find(".//{/1.1/}reviewtext")
         references = record.find(".//{/1.1/}references")
-        
         data.append({
             "document_id": document_id.text if document_id is not None else "N/A",
             "title": title.text if title is not None else "N/A",
@@ -44,6 +43,7 @@ def parse_zbmath_xml(file_path):
             "msc": msc.text if msc is not None else "N/A",
             "keywords": keywords.text if keywords is not None else "N/A",
             "references": references.text if references is not None else "N/A",
+            "references_id": references.ref_id if references is not None else "N/A",
         })
     df = pd.DataFrame(data)
     df.to_csv("zbmath_data.csv", index=False)
