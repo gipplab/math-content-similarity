@@ -2,7 +2,7 @@
 
 HyMathRec consists of two main components: **InitialRanker** and **ReRanker**. The results from the **InitialRanker** are used by the **ReRanker**, which produces the final ranked list of recommendations.
 
-- Please ensure that you obtain the **zbMATH Open** data before running the scripts to generate recommendations.
+- Please ensure that you obtain the **zbMATH Open** data in a csv file before running the scripts to generate recommendations.
 - For instructions on how to obtain the data, please refer to the "data/Readme.md" file in this repository.
 
 ## Step 1: HyMathRec-InitialRanker
