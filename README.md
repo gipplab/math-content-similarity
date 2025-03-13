@@ -23,9 +23,7 @@ The results of the re-ranker on zbRevCit is available in [src/Re-ranker/Readmde.
 ## Reproducing Results
 
 We expect that you have a csv file with columns similar to ```zbMATHDocsData.csv``` (explained in [data/Readme.md](data/Readme.md)).
-To generate top 10 ranked recommendations for a document (e.g., docID: 7952804), please go to the following page and follow mentioned intructions.
-
-```[src/HyMathRec/Readmde.md](src/HyMathRec/Readmde.md)```
+To generate top 10 ranked recommendations for a document (e.g., docID: 7952804), please go to the following page and follow mentioned intructions in: [src/HyMathRec/Readmde.md](src/HyMathRec/Readmde.md)
 
 ### Baseline models (Table 2)
 
