@@ -13,7 +13,8 @@ When viewing a document on zbMATH Open, obtain its internal identifier (docID). 
 
 #### **Step 2: Visit the MaRDI Portal**
 Click on the following URL by replacing docID with the actual docID to access the document on the MaRDI portal: 
-- https://portal.mardi4nfdi.de/wiki/Special:PidRedirect?propertyId=1451&value=<docID>
+
+```https://portal.mardi4nfdi.de/wiki/Special:PidRedirect?propertyId=1451&value=<docID>```
 
 - Example document with docID = 1213980
 🔗 [https://portal.mardi4nfdi.de/wiki/Special:PidRedirect?propertyId=1451&value=1213980](https://portal.mardi4nfdi.de/wiki/Special:PidRedirect?propertyId=1451&value=1213980)
