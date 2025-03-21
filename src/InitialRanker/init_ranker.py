@@ -96,7 +96,44 @@ def creatIndexes(main_data_, model_dir):
     createIndex(main_data_,'title',model_name_or_path=model_dir) # feat title
     createIndex(main_data_,'msc',model_name_or_path=model_dir) # feat msc
     createIndex(main_data_,'keywords',model_name_or_path=model_dir) # feat keywords
-    # for keywords we don't need index, direct initial ranked list can be generated 
+    # for references we don't need index, direct initial ranked list can be generated 
+
+def saveInitiCands(pd_df):
+    zbdata_dir = 'data/zbMATHDocsData.csv' # generated with zbMATHDocsData.py
+    main_data = getComplData(zbdata_dir)
+    model_dir = "dunzhang/stella_en_400M_v5"
+    instruction = INSTRUCTIONS["qa"]
+    model = SentenceTransformer(model_dir, device='cuda', trust_remote_code=True)
+    num_scores = 10 #number of ranked docs
+    embedding_dim = model.get_sentence_embedding_dimension()
+    main_resul = {}
+    indexes = {}
+    pasr = 0
+    for feat_ in ['text', 'title', 'msc', 'keywords']:
+        indexes[feat_] = faiss.read_index(f"data/indexes/{feat_}_.index")
+    for index, row in pd_df.iterrows():
+        doc_id = int(row['document_id'])
+        print("Doing for: ", doc_id,index,flush=True)
+        results_ = {}
+        pasr += 1
+        for feat_ in ['text', 'title', 'msc', 'keywords']:
+            index = indexes[feat_]
+            doc_content = getdoccont(doc_id, feat_, main_data)
+            if doc_content != " ":
+                embeddings_batch = model.encode([doc_content], convert_to_numpy=True, device='cuda')
+                faiss.normalize_L2(embeddings_batch)
+                scores, ranked_indices = index.search(embeddings_batch, num_scores)
+                ranked_doc_ids = [(main_data['document_id'].iloc[idx_],score) for score,idx_ in zip(scores[0],ranked_indices[0])]
+                results_[feat_] = ranked_doc_ids
+            else:
+                results_[feat_] = []
+        main_resul[doc_id] = results_
+        #if pasr > 600:
+        #    break
+    #print(main_resul)
+    with open('initRanked_results.pkl', 'wb') as file: #tialRanker
+        pickle.dump(main_resul, file)
+
 
 def getInitRankedDoc(doc_id_, model_dir, main_data):
     instruction = INSTRUCTIONS["qa"]

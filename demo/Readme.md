@@ -9,7 +9,7 @@ When viewing a document on zbMATH Open, obtain its internal identifier (docID). 
 - [Link to an example document on zbMATH Open](https://zbmath.org/0915.46047)
 - Click on the Cite button below the article.
 - Select Format from the dropdown menu as "BibTeX"
-- The last digits after the word zbMATH0, i.e., 1213980 is the docID
+- In the "BibTeX" key, the last digits after the word zbMATH0, i.e., 1213980 is the docID
 
 #### **Step 2: Visit the MaRDI Portal**
 Click on the following URL by replacing docID with the actual docID to access the document on the MaRDI portal: 
