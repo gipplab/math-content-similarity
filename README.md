@@ -1,6 +1,6 @@
 ## About
 
-This repository contains the resources of SIGIR'2025 submission "MATHRecSys: Recommender System for Math Research Papers"
+This repository contains the resources of RecSys'2025 submission "MATHRecSys: Recommender System for Math Research Papers"
 
 ## Install Dependencies
 
