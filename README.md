@@ -16,10 +16,6 @@ Please refer to [data/Readme.md](data/Readme.md) of this repository to get infor
 
 Please refer to the [demo/Readme.md](demo/Readme.md) folder of this repository on how does the recommendations looks on the MarDI portal. 
 
-## Additional Result Table
-
-The results of the re-ranker on zbRevCit is available in [src/Re-ranker/Readmde.md](src/Re-ranker/Readmde.md).
-
 ## Reproducing Results
 
 We expect that you have a csv file with columns similar to ```zbMATHDocsData.csv``` (explained in [data/Readme.md](data/Readme.md)).
@@ -31,20 +27,17 @@ To get evaluation results of baseline, please follow the mentioned steps:
 
 ```src/base_models/Readme.md```
 
-
-### Fine tuned Stella (Table 3)
-
 To get evaluation results of fine tuned stella, please follow the mentioned steps:
 
 ```src/stella_finetune/Readme.md```
 
-### Initial Ranker candidates (Table 4)
+### Initial Ranker candidates (Table 3)
 
 To get evaluation results of Initial Ranker, please follow the mentioned steps:
 
 ```src/InitialRanker/Readme.md```
 
-### Re-anker candidates (Table 5)
+### Re-anker candidates (Table 4)
 
 To get evaluation results of Re-ranker and the evaluation results of the reranker on zbRevCit dataset please refer to:
 
