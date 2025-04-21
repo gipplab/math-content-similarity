@@ -5,7 +5,7 @@ Here, we explain how to browse recommendations for **zbMATH Open** documents on 
 ### Steps to Access Recommendations
 
 #### **Step 1: Identify the zbMATH Open Document**
-When viewing a document on zbMATH Open, obtain its internal identifier (docID). Steps to obtain the docID for any zbMATH Open document. 
+When viewing a document on zbMATH Open, obtain its internal identifier (docID). Steps to obtain the docID for any zbMATH Open document: 
 - [Link to an example document on zbMATH Open](https://zbmath.org/0915.46047)
 - Click on the Cite button below the article.
 - Select Format from the dropdown menu as "BibTeX"
@@ -26,3 +26,8 @@ Click on the following URL by replacing docID with the actual docID to access th
 Below is an example of recommendations displayed on the MaRDI portal:
 
 ![Demo recommendations](./Mardisamplerecmds.jpg)
+
+#### **Step 4: Feedback on Quality of Recommendations**
+
+After each recommendation, you'll find a like or dislike icon next to the recommendation title. Simply click on the icon that best reflects your opinion of the recommendation (like if you find it helpful, or dislike if it's not relevant).
+Once your feedback is successfully recorded, a confirmation message will appear. This feedback will then be used to improve generated recommendations.
