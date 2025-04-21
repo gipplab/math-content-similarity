@@ -23,7 +23,6 @@ def process_log_data(data):
                     results.append([seed, target, reaction, visitor_id])
     return results
 
-# Write the results to a CSV file
 def write_to_csv(results, output_file_path):
     with open(output_file_path, 'w', newline='', encoding='utf-8') as csvfile:
         writer = csv.writer(csvfile)
@@ -38,6 +37,5 @@ def main():
     write_to_csv(results, output_file)
     print(f"Results saved to {output_file}")
 
-# Run the main function
 if __name__ == "__main__":
     main()
