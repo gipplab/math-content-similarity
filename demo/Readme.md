@@ -25,7 +25,7 @@ Click on the following URL by replacing docID with the actual docID to access th
 ### Example: Recommendations Preview  
 Below is an example of recommendations displayed on the MaRDI portal:
 
-![Demo recommendations](./Mardisamplerecmds.jpg)
+![Demo recommendations](./Mardisamplerecmds.png)
 
 #### **Step 4: Feedback on Quality of Recommendations**
 
