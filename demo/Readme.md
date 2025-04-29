@@ -27,6 +27,8 @@ Below is an example of recommendations displayed on the MaRDI portal:
 
 ![Demo recommendations](./Mardisamplerecmds.png)
 
+Please note that we typically show 10 recommendations for each document. However, in the case of some documents, there may be fewer than 10 recommendations due to the unavailability of certain articles on the MaRDI platform.  
+
 #### **Step 4: Feedback on Quality of Recommendations**
 
 After each recommendation, you'll find a like or dislike icon next to the recommendation title. Simply click on the icon that best reflects your opinion of the recommendation (like if you find it helpful, or dislike if it's not relevant).
